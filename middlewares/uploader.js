@@ -1,4 +1,5 @@
 const multer = require("multer");
+const ApiError = require("../utils/apiError");
 
 const multerFiltering = (req, file, cb) => {
   if (
@@ -8,7 +9,7 @@ const multerFiltering = (req, file, cb) => {
   ) {
     cb(null, true);
   } else {
-    return cb("hanya format image saja");
+    return cb(new ApiError("hanya format image saja", 400));
   }
 };
 
