@@ -1,4 +1,5 @@
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 const { Auth, User } = require("../models");
 
@@ -72,10 +73,20 @@ const login = async (req, res, next) => {
     });
 
     if (user && bcrypt.compareSync(password, user.password)) {
+      const token = jwt.sign(
+        {
+          id: user.userId,
+          username: user.User.name,
+          role: user.User.role,
+          email: user.email,
+        },
+        process.env.JWT_SECRET
+      );
+
       res.status(200).json({
         status: "success",
         message: "Logged in successfully",
-        data: user,
+        data: token,
       });
     } else {
       next(new ApiError("wrong credentials or user does not exist", 400));
