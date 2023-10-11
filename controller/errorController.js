@@ -1,6 +1,4 @@
-const errorHandler = (err, req, res, next) => {
-  console.log(err.stack);
-
+module.exports = (err, req, res, next) => {
   err.statusCode = err.statusCode || 500;
   err.status = err.status;
   err.message = err.message;
@@ -10,5 +8,3 @@ const errorHandler = (err, req, res, next) => {
     message: err.message,
   });
 };
-
-module.exports = errorHandler;

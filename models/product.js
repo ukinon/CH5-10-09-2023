@@ -21,6 +21,7 @@ module.exports = (sequelize, DataTypes) => {
         defaultValue:
           "https://tse2.mm.bing.net/th?id=OIP.U2iQ7wNK6ZzTW_traW_-PQHaHa&pid=Api&P=0&h=180",
       },
+      userId: DataTypes.INTEGER,
     },
     {
       sequelize,

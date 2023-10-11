@@ -3,11 +3,10 @@ require("dotenv").config();
 
 const express = require("express");
 const morgan = require("morgan");
+const ApiError = require("./utils/apiError");
+const errorHandler = require("./controller/errorController");
 
 const router = require("./routes");
-const ApiError = require("./utils/apiError");
-
-const errorHandler = require("./controller/errorController");
 
 const PORT = process.env.PORT || 3000;
 
@@ -22,7 +21,7 @@ app.use(morgan("dev"));
 app.use(router);
 
 app.all("*", (req, res, next) => {
-  next(new ApiError("routes does not exist", 404));
+  next(new ApiError(`Routes does not exist`, 404));
 });
 
 app.use(errorHandler);
